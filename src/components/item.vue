@@ -20,11 +20,10 @@
 export default {
   props: {
     item: {
-      type: String,
+      type: Object,
       required: true
     }
   }
-
 }
 </script>
 
