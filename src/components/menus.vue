@@ -1,17 +1,18 @@
 <template>
   <div class="list-todos">
-    <!--菜单容器-->
-    <a class="list-todo activeListClass list">
-      <!--单个菜单容器-->
-      <span class="icon-lock"></span>
-      <!--锁的图标-->
-      <span class="count-list">1</span>
-      <!--数字-->
-      星期一
-      <!--菜单内容-->
+    <a 
+      v-for="item in items" 
+      :key="item.id"
+      class="list-todo activeListClass list">
+      <span 
+        v-if="item.locked" 
+        class="icon-lock"></span>
+      <span 
+        v-if="item.count > 0" 
+        class="count-list">{{ item.count }}</span>
+      {{ item.title }}
     </a>
     <a class="link-list-new">
-      <!--新增菜单-->
       <span class="icon-plus">
       </span>
       新增
@@ -19,7 +20,16 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      items: [
+        {title: '星期一', count: 1, locked: true},
+        {title: '星期二', count: 2, locked: false}
+      ]
+    }
+  }
+};
 
 </script>
 <style lang="less">
