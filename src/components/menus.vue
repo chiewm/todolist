@@ -1,14 +1,14 @@
 <template>
   <div class="list-todos">
-    <a 
-      v-for="item in items" 
+    <a
+      v-for="item in items"
       :key="item.id"
       class="list-todo activeListClass list">
-      <span 
-        v-if="item.locked" 
+      <span
+        v-if="item.locked"
         class="icon-lock"></span>
-      <span 
-        v-if="item.count > 0" 
+      <span
+        v-if="item.count > 0"
         class="count-list">{{ item.count }}</span>
       {{ item.title }}
     </a>
