@@ -3,7 +3,9 @@
     <a
       v-for="item in items"
       :key="item.id"
-      class="list-todo activeListClass list">
+      :class="{'active': item.id === todoId}"
+      class="list-todo list activeListClass"
+      @click="goList(item.id)">
       <span
         v-if="item.locked"
         class="icon-lock"></span>
@@ -20,15 +22,28 @@
   </div>
 </template>
 <script>
+import { getTodoList, addTodo } from "../api/api"
 export default {
   data() {
     return {
-      items: [
-        {title: '星期一', count: 1, locked: true},
-        {title: '星期二', count: 2, locked: false}
-      ]
+      items: [],
+      todoId: ''
     }
+  },
+  created() {
+    getTodoList({}).then(res => {
+      const TODOS = res.data.todos
+      this.items = TODOS;
+      this.todoId = TODOS[0].id
+    })
+  },
+  methods: {
+    goList(id) {
+      this.todoId = id
+    },
+
   }
+
 };
 
 </script>
