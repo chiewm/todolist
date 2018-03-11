@@ -14,7 +14,9 @@
         class="count-list">{{ item.count }}</span>
       {{ item.title }}
     </a>
-    <a class="link-list-new">
+    <a
+      class="link-list-new"
+      @click="addTodoList">
       <span class="icon-plus">
       </span>
       新增
@@ -41,9 +43,16 @@ export default {
     goList(id) {
       this.todoId = id
     },
-
+    addTodoList() {
+      addTodo({}).then(data => {
+        getTodoList({}).then(res => {
+          const TODOS = res.data.todos
+          this.todoId = TODOS[TODOS.length - 1].id
+          this.items = TODOS
+        })
+      })
+    }
   }
-
 };
 
 </script>
